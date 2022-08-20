@@ -1,0 +1,121 @@
+<section class="container">
+    <h2>tabla de experiencias</h2>
+  <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#myModalAdd">agregar</button>         
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nombre del trabajo</th>
+        <th>Descripcion del puesto</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of misExperiencias, let indice = index">
+        <td>{{item.nombreTrabajo}}</td>
+        <td>{{item.descripcionPuesto}}</td>
+        <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModalEdit" (click)="buscarExperiencia(indice)">editar</button></td>
+        <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModalEliminar" (click)="buscarExperiencia(indice)">eliminar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Modal para add expereincia -->
+<div class="modal" id="myModalAdd">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Agregar una Experiencia</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="formExperiencia" (ngSubmit)="agregarExperiencia()">
+          <div class="mb-3 mt-3">
+            <label for="email" class="form-label">Nombre del trabajo:</label>
+            <input type="email" class="form-control" formControlName="nombreTrabajo" placeholder="Nombre del trabajo" name="nombreTrabajo" [ngModel]="nombreTrabajo">
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="email" class="form-label">Descripcion del puesto:</label>
+            <input type="email" class="form-control" formControlName="descripcionPuesto" placeholder="Descripcion del puesto" name="descripcionPuesto" [ngModel]="descripcionPuesto">
+          </div>
+          <button type="submit" class="btn btn-primary">Agregar</button>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal para edit expereincia -->
+<div class="modal" id="myModalEdit">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Editar Experiencia</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="formExperiencia" (ngSubmit)="editarExperiencia(auxId)">
+          <div class="mb-3 mt-3">
+            <label for="email" class="form-label">Nombre del trabajo:</label>
+            <input type="email" class="form-control" formControlName="nombreTrabajo" placeholder="Nombre del trabajo" name="nombreTrabajo" [ngModel]="nombreTrabajoSelect">
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="email" class="form-label">Descripcion del puesto:</label>
+            <input type="email" class="form-control" formControlName="descripcionPuesto" placeholder="Descripcion del puesto" name="descripcionPuesto" [ngModel]="descripcionPuestoSelect">
+          </div>
+          <button type="submit" class="btn btn-primary">editar</button>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal para eliminar expereincia -->
+<div class="modal" id="myModalEliminar">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"> Eliminar Experiencia? </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form [formGroup]="formExperiencia" (ngSubmit)="eliminarExperiencia(auxId)">
+          <h4>{{nombreTrabajoSelect}}</h4>
+          <button type="submit" class="btn btn-primary">Eliminar</button>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
